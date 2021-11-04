@@ -48,6 +48,7 @@ export const GameReducer = (
         player: {
           ...state.player,
           moves: playerMoves,
+          // TODO replace with newPosition instead
           position: playerNewPosition(
             state.player.position,
             action.value,

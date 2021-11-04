@@ -1,27 +1,17 @@
 import React from "react";
+import { Food } from "../components/Food";
+import { MoveStat } from "../components/MoveStat";
+import { Player } from "../components/Player";
 import { IAllowedMoves } from "../contexts/gameActions";
 import { useGameContext } from "../contexts/gameContext";
-const keys = new Map<string, string>([
-  ["ArrowUp", "UP"],
-  ["ArrowDown", "DOWN"],
-  ["ArrowRight", "RIGHT"],
-  ["ArrowLeft", "LEFT"],
-]);
+import { useKeyPress } from "../hooks/useKeyPress";
+
 export const GameScreen = () => {
-  const { state: game, dispatch } = useGameContext();
+  const { state: game } = useGameContext();
   const grid = [...Array(game.grid)];
+
   // key press listener
-  React.useEffect(() => {
-    const keyHandler = (event: KeyboardEvent) => {
-      if (keys.has(event.key)) {
-        dispatch({ type: "MOVE", value: keys.get(event.key) as IAllowedMoves });
-      }
-    };
-    window.addEventListener("keydown", keyHandler);
-    return () => {
-      window.removeEventListener("keydown", keyHandler);
-    };
-  }, []);
+  useKeyPress()
 
   return (
     <div className="game-body">
@@ -31,7 +21,7 @@ export const GameScreen = () => {
                 Grid: <strong>{game.grid}&times;{game.grid}</strong>
             </div>
             <div>
-                <img src="/public/vectors/life.svg"/>
+                <img src="/vectors/life.svg"/>
                 <div>
                     <div style={{width: `${(game.player.moves/game.totalMoves) * 100}%`}}/>
                 </div>
@@ -41,35 +31,24 @@ export const GameScreen = () => {
             </div>
         </div>
         <div className="board">
-          {grid.map((el, col) => (
-            <div className="row" key={`col${col}`}>
-              {grid.map((elm, row) => (
-                <div className="cell" key={`row${row}col${col}`}>
+          {grid.map((el, row) => (
+            <div className="row" key={`row${row}`}>
+              {grid.map((elm, cell) => (
+                <div className="cell" key={`row${row}col${cell}`}>
                 
-                  {game.foods.find((f) => f.x === row && f.y === col) && (
-                    <div className="food">
-                      <img src={"/public/vectors/food.svg"} />
-                    </div>
+                  {game.foods.find((f) => f.x === cell && f.y === row) && (
+                    <Food/>
                   )}
-                  {game.player.position.x === row &&
-                    game.player.position.y === col && (
-                      <div className="player">
-                        <img src={"/public/vectors/player.svg"} />
-                      </div>
+                  {game.player.position.x === cell &&
+                    game.player.position.y === row && (
+                      <Player/>
                     )}
                 </div>
               ))}
             </div>
           ))}
         </div>
-        <div className="moves-stat">
-          <div>
-            Maximum moves: <strong>{game.totalMoves}</strong>
-          </div>
-          <div>
-            Total moves: <strong>{game.player.moves}</strong>
-          </div>
-        </div>
+        <MoveStat/>
       </div>
     </div>
   );
