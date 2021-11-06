@@ -1,8 +1,6 @@
 import React from "react";
-import { Food } from "../components/Food";
-import { MoveStat } from "../components/MoveStat";
+import { Sprite } from "../components/Sprite";
 import { Player } from "../components/Player";
-import { IAllowedMoves } from "../contexts/gameActions";
 import { useGameContext } from "../contexts/gameContext";
 import { useKeyPress } from "../hooks/useKeyPress";
 
@@ -21,14 +19,12 @@ export const GameScreen = () => {
                 Grid: <strong>{game.grid}&times;{game.grid}</strong>
             </div>
             <div>
-                <img src="/vectors/life.svg"/>
+                
                 <div>
                     <div style={{width: `${(game.player.moves/game.totalMoves) * 100}%`}}/>
                 </div>
             </div>
-            <div>
-                Time Spent: <strong> secs</strong>
-            </div>
+            
         </div>
         <div className="board">
           {grid.map((el, row) => (
@@ -37,7 +33,7 @@ export const GameScreen = () => {
                 <div className="cell" key={`row${row}col${cell}`}>
                 
                   {game.foods.find((f) => f.x === cell && f.y === row) && (
-                    <Food/>
+                    <Sprite/>
                   )}
                   {game.player.position.x === cell &&
                     game.player.position.y === row && (
@@ -48,7 +44,6 @@ export const GameScreen = () => {
             </div>
           ))}
         </div>
-        <MoveStat/>
       </div>
     </div>
   );

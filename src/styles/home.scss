@@ -25,14 +25,14 @@
     }
   }
   .player-img {
-    width: 9rem;
+    width: 2rem;
     height: auto;
   }
   .title {
     color: #FFC700;
     font-weight: 600;
-    font-size: 3rem;
-    line-height: 77px;
+    font-size: 2rem;
+    line-height: 20px;
     text-align: center;
     margin-top: 1rem;
     margin-bottom: .8rem;
@@ -60,7 +60,7 @@
       &__input {
         width: 9rem;
         height: 3.5rem;
-        background: transparent;
+        background: purple;
         color: white;
         font-weight: 500;
         font-size: 2rem;

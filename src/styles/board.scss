@@ -1,7 +1,7 @@
 .game-body {
  height: 100vh;
  width: 100vw;
- background-image: url('/vectors/game-bg.svg');
+ background-image: url('/vectors/game-bg.jpg');
  display: grid;
  place-items: center;
  font-size: var(--game-font-size);
@@ -48,7 +48,7 @@
         }
     }
 }
-.food {
+.sprite {
     width: var(--cell-size);
     height: var(--cell-size);
     display: flex;

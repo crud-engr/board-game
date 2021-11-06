@@ -8,21 +8,21 @@ export const HomeScreen = () => {
     <div className="home-body">
       <div className="home-bg">
         <div className="home-container">
-          <img className="player-img" src="/vectors/player.svg" />
+          <img className="player-img" src="/vectors/player.png" />
           <h1 className="title">
             {state.screen === "WIN"
-              ? "Bravo!"
+              ? "Good!"
               : state.screen === "LOSE"
               ? "Game over!"
-              : "Greedy Hunter "}
+              : "Eat Sprite"}
           </h1>
           <div>
             {state.screen === "HOME" && (
               <>
                 <p className="subtitle">
-                  The aim is to eat all the food in record time
+                  Eat all the sprite in a period of time. Move very fast!!!
                 </p>
-                <p className="subtitle">Configure your game grid below 👇🏼</p>
+                
               </>
             )}
             {state.screen === "WIN" && (
@@ -30,19 +30,17 @@ export const HomeScreen = () => {
                 Total foods: {state.grid - state.foods.length}/{state.grid}
               </p>
             )}
-            {["WIN", "LOSE"].includes(state.screen) && (
-              <p className="subtitle">Time spent: {state.time} seconds</p>
-            )}
+            {["WIN", "LOSE"].includes(state.screen)}
           </div>
 
           <div className="grid-input">
-            <span className="grid-input__label">Game grid</span>
+            <span className="grid-input__label">Enter Grid</span>
             <select
               className="grid-input__input"
               value={grid}
               onChange={(e) => setGrid(parseInt(e.currentTarget.value))}
             >
-              {[5, 6, 7, 8, 9, 10, 11, 12].map((element) => (
+              {[3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((element) => (
                 <option key={element} value={element}>
                   {element}
                 </option>
